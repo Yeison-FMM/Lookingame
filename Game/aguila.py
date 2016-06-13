@@ -9,8 +9,6 @@ import constants
 from spritesheet_functions import SpriteSheet
 
 class Aguila(pygame.sprite.Sprite):
-	""" This class represents the bar at the bottom that the player
-	controls. """
 
 	# -- Attributes
 	limite_izquierdo = 0
@@ -22,14 +20,13 @@ class Aguila(pygame.sprite.Sprite):
 
 	# -- Methods
 	def __init__(self):
-		""" Constructor function """
 
-		# Call the parent's constructor
 		pygame.sprite.Sprite.__init__(self)
 		self.image = pygame.image.load("aguila.png")
 		self.rect = self.image.get_rect()
 		self.vida = 150
 
+	# Actualiza la posicion del aguila en x y en y
 	def update(self):
 		self.rect.x += self.cambio_x
 		self.rect.y += self.cambio_y

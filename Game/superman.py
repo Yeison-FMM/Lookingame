@@ -9,8 +9,6 @@ import constants
 from spritesheet_functions import SpriteSheet
 
 class Superman(pygame.sprite.Sprite):
-	""" This class represents the bar at the bottom that the player
-	controls. """
 
 	# -- Attributes
 	limite_izquierdo = 0

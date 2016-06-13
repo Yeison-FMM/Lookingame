@@ -4,28 +4,20 @@ import constants
 import platforms
 
 class Level():
-	""" This is a generic super-class used to define a level.
-		Create a child class for each level with level-specific
-		info. """
-
-	# Lists of sprites used in all levels. Add or remove
-	# lists as needed for your game. """
+	# Atributos
 	platform_list = None
 	enemy_list = None
 
 	# Background image
 	background = None
 
-	# How far this world has been scrolled left/right
+	# Sirve para hacer "scroll y mover el mundo cuando movemos el jugador"
 	world_shift = 0
 	level_limit = -1000
 
 
 	def __init__(self, player,buho,enemigo):
 
-
-		""" Constructor. Pass in a handle to player. Needed for when moving platforms
-			collide with the player. """
 		self.platform_list = pygame.sprite.Group()
 		self.enemy_list = pygame.sprite.Group()
 		self.player = player
@@ -33,17 +25,13 @@ class Level():
 
 		self.enemigo = enemigo
 
-	# Update everythign on this level
+	# 
 	def update(self):
-		""" Update everything in this level."""
 		self.platform_list.update()
 		self.enemy_list.update()
 
 	def draw(self, screen,puntaje,vida_personaje,vida_jefe):
 
-		# Draw the background
-		# We don't shift the background as much as the sprites are shifted
-		# to give a feeling of depth.
 		font = pygame.font.Font("fonts/FEASFBI_.TTF",20)
 		screen.blit(self.background,(self.world_shift // 3,0))
 		label_1 = font.render("Puntaje: ",True,(255,255,255))
@@ -58,31 +46,26 @@ class Level():
 		screen.blit(textSurface_1,(90,0))
 		screen.blit(textSurface_2,(204,0))
 		screen.blit(textSurface_3,(740,0))
-		screen.blit(self.background,(self.world_shift // 3,0))
-		# Draw all the sprite lists that we have
+
 		self.platform_list.draw(screen)
 		self.enemy_list.draw(screen)
 
 	def shift_world(self, shift_x):
-		""" When the user moves left/right and we need to scroll everything: """
-
-		# Keep track of the shift amount
+		# Corremos el mundo lo indicado por shift_x mas la posicion del mundo
 		self.world_shift += shift_x
 
-		# Go through all the sprite lists and shift
+		# Desplazamos las plataformas y los enemigos cuando corremos el mundo
 		for platform in self.platform_list:
 			platform.rect.x += shift_x
 
 		for enemy in self.enemy_list:
 			enemy.rect.x += shift_x
 
-# Create platforms for the level
+# Creamos el nivel 1
 class Level_01(Level):
-	""" Definition for level 1. """
 
 	def __init__(self, player, buho, enemigo):
-		""" Create level 1. """
-
+		
 		# Call the parent constructor
 		Level.__init__(self, player, buho, enemigo)
 
@@ -90,7 +73,7 @@ class Level_01(Level):
 		self.background.set_colorkey(constants.WHITE)
 		self.level_limit = -2500
 
-		# Array with type of platform, and x, y location of the platform.
+		# Aqui tenemos las plataformas del background
 		level = [ [platforms.GRASS_LEFT, 500, 500],
 				  [platforms.GRASS_MIDDLE, 570, 500],
 				  [platforms.GRASS_RIGHT, 640, 500],
@@ -105,7 +88,7 @@ class Level_01(Level):
 				  [platforms.STONE_PLATFORM_RIGHT, 1260, 280],
 				  ]
 
-		# Go through the array above and add platforms
+		
 		for platform in level:
 			block = platforms.Platform(platform[0])
 			block.rect.x = platform[1]
@@ -116,7 +99,7 @@ class Level_01(Level):
 
 			self.platform_list.add(block)
 
-		# Add a custom moving platform
+		# Se agrega el bloque pequeño que se mueve
 		block = platforms.MovingPlatform(platforms.STONE_PLATFORM_MIDDLE)
 		block.rect.x = 1350
 		block.rect.y = 280
@@ -128,14 +111,11 @@ class Level_01(Level):
 		self.platform_list.add(block)
 
 
-# Create platforms for the level
+# Creamos el nivel 2 de la misma forma que el nivel 1, con diferente background
 class Level_02(Level):
-	""" Definition for level 2. """
 
 	def __init__(self, player,buho,enemigo):
-		""" Create level 1. """
-
-		# Call the parent constructor
+		
 		Level.__init__(self, player,buho,enemigo)
 
 		self.background = pygame.image.load("background_02.png").convert()
@@ -157,8 +137,6 @@ class Level_02(Level):
 				  [platforms.STONE_PLATFORM_RIGHT, 1260, 280],
 				  ]
 
-
-		# Go through the array above and add platforms
 		for platform in level:
 			block = platforms.Platform(platform[0])
 			block.rect.x = platform[1]
@@ -168,7 +146,6 @@ class Level_02(Level):
 			block.enemigo = self.enemigo
 			self.platform_list.add(block)
 
-		# Add a custom moving platform
 		block = platforms.MovingPlatform(platforms.STONE_PLATFORM_MIDDLE)
 		block.rect.x = 1500
 		block.rect.y = 300

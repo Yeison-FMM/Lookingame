@@ -5,24 +5,15 @@ import pygame
 import math
 import random
 import constants
-
 from platforms import MovingPlatform
-
 from spritesheet_functions import SpriteSheet
 
 class Buho(pygame.sprite.Sprite):
-	""" This class represents the bar at the bottom that the player
-	controls. """
 
 	# -- Attributes
-	# Set speed vector of player
 	change_x = 0
 	change_y = 0
 
-	# This holds all the images for the animated walk left/right
-	# of our player
-	walking_frames_l = []
-	walking_frames_r = []
 	# Este es el "centro" que el sprite orbitará
 	centrar_x = 0
 	centrar_y = 0
@@ -37,7 +28,6 @@ class Buho(pygame.sprite.Sprite):
 	velocidad = 0.05
 
 
-	# List of sprites we can bump against
 	level = None
 
 
@@ -48,30 +38,10 @@ class Buho(pygame.sprite.Sprite):
 		# Call the parent's constructor
 		pygame.sprite.Sprite.__init__(self)
 
-
-		image = self.walking_frames_r.append(pygame.image.load('enem1.png'))
+		# Cargamos la imagen del enemigo
+		self.image = pygame.image.load('enem1.png')
 		 
-		sprite_sheet = SpriteSheet("chicken.png")
-		image = self.walking_frames_r.append(pygame.image.load('enem1.png'))
-		image = self.walking_frames_r.append(pygame.image.load('enem2.png'))
-		image = self.walking_frames_r.append(pygame.image.load('enem3.png'))
-		image = self.walking_frames_r.append(pygame.image.load('enem4.png'))
-		# Load all the right facing images into a list
-
-
-		# Load all the right facing images, then flip them
-		# to face left.
-		image = sprite_sheet.get_image(0, 47, 50, 20)
-		image = pygame.transform.flip(image, True, False)
-		image = self.walking_frames_l.append(pygame.image.load('enem1l.png'))
-		image = self.walking_frames_l.append(pygame.image.load('enem2l.png'))
-		image = self.walking_frames_l.append(pygame.image.load('enem3l.png'))
-		image = self.walking_frames_r.append(pygame.image.load('enem4l.png'))
-
-		# Set the image the player starts with
-		self.image = self.walking_frames_r[0]
-
-		# Set a referance to the image rect.
+		# Guardamos una referencia para el rectangulo de la imagen
 		self.rect = self.image.get_rect()
 
 	def update(self):

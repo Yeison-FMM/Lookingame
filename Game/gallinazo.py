@@ -9,19 +9,10 @@ import constants
 from spritesheet_functions import SpriteSheet
 
 class Gallinazo(pygame.sprite.Sprite):
-    """ This class represents the bar at the bottom that the player
-    controls. """
 
-    # -- Attributes
-    # Set speed vector of player
     change_x = 0
     change_y = 0
 
-    # This holds all the images for the animated walk left/right
-    # of our player
-    walking_frames_l = []
-    walking_frames_r = []
-    # Este es el "centro" que el sprite orbitará
     centrar_x = 0
     centrar_y = 0
  
@@ -41,13 +32,8 @@ class Gallinazo(pygame.sprite.Sprite):
         # Call the parent's constructor
         pygame.sprite.Sprite.__init__(self)
 
-        image = self.walking_frames_r.append(pygame.image.load('minigalli.png'))
+        image =pygame.image.load('minigalli.png')
 
-
-        # Set the image the player starts with
-        self.image = self.walking_frames_r[0]
-
-        # Set a referance to the image rect.
         self.rect = self.image.get_rect()
 
     def update(self):

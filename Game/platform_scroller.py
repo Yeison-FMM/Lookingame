@@ -4,7 +4,6 @@
 import pygame, sys
 import math, random
 import constants
-
 import levels, time
 from bala import Bala
 from pygame.locals import * 
@@ -13,17 +12,10 @@ from buho import Buho
 from aguila import Aguila
 from gallinazo import Gallinazo
 from halcon import Halcon
-
-import levels
-from pygame.locals import * 
-from player import Player
-from buho import Buho
-
 from menu import Menu
 import pygame, os 
 
 class Game:
-
 	def __init__(self):
 		os.environ['SDL_VIDEO_CENTERED'] = '1'
 		self.screen = pygame.display.set_mode((constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT))
@@ -67,6 +59,7 @@ class Game:
 	def dispararEnem(self,ls_balaenemie,enemies_list,active_sprite_list):
 		for i in ls_balaenemie:
 			self.active_sprite_list.add(i)
+
 
 	def recargarEnem(self, enemies_list,ls_balaenemie,active_sprite_list):
 		for i in enemies_list:
@@ -501,6 +494,5 @@ class Game:
 			pygame.display.flip()
 			pygame.time.delay(10)
 		return 0
-
 if __name__ == "__main__":
 	Game().main()
