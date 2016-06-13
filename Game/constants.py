@@ -4,7 +4,7 @@
 """
 Global constants
 """
-from platform_scroller import Game
+from lookingame import Game
 
 # Colors
 BLACK    = (   0,   0,   0) 
@@ -18,7 +18,7 @@ SCREEN_HEIGHT = 600
 # Options
 opciones = [
 			("Jugar", Game().comenzar_nuevo_juego),
-			("Opciones", Game().mostrar_opciones),
+			("Instruc", Game().mostrar_opciones),
 			("Salir", Game().salir_del_programa)
 		]
 

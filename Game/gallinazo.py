@@ -32,7 +32,7 @@ class Gallinazo(pygame.sprite.Sprite):
         # Call the parent's constructor
         pygame.sprite.Sprite.__init__(self)
 
-        image =pygame.image.load('minigalli.png')
+        self.image =pygame.image.load('minigalli.png')
 
         self.rect = self.image.get_rect()
 

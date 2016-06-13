@@ -20,7 +20,6 @@ class Superman(pygame.sprite.Sprite):
 
 	# -- Methods
 	def __init__(self):
-		""" Constructor function """
 
 		# Call the parent's constructor
 		pygame.sprite.Sprite.__init__(self)

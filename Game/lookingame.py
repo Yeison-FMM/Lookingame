@@ -9,6 +9,7 @@ from bala import Bala
 from pygame.locals import * 
 from player import Player
 from buho import Buho
+from GIFImage import GIFImage
 from aguila import Aguila
 from gallinazo import Gallinazo
 from halcon import Halcon
@@ -21,6 +22,7 @@ class Game:
 		# Establecemos algunos atributos iniciales de juego: background, imagen de perdida y de vencedor entre otras
 		self.screen = pygame.display.set_mode((constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT))
 		self.background_image = self.load_image("images/background_initial.png").convert()
+		self.instruccion = GIFImage("intro.gif")
 		self.gameover = self.load_image("game-over.jpg").convert()
 		self.gana = self.load_image("win.png").convert()
 		self.pause = True
@@ -168,7 +170,7 @@ class Game:
 		# Establecemos una ubicacion aleatoria para el halcon
 		halcon.rect.x = random.randrange(160)
 		halcon.rect.y = random.randrange(10)
-		ahalcon.cambio_x = random.randrange(-3,4)
+		halcon.cambio_x = random.randrange(-3,4)
 		halcon.cambio_y = random.randrange(-3,4)
 		halcon.limite_izquierdo = 0
 		halcon.limite_superior = 0
@@ -185,6 +187,7 @@ class Game:
 		superman.limite_derecho = constants.SCREEN_WIDTH
 		superman.limite_inferior = constants.SCREEN_HEIGHT
 		""" 
+
 		# Creamos la cantidad de enemigos buho en el juego
 		for i in range(1):
 			buho = Buho()
@@ -483,7 +486,17 @@ class Game:
 			pygame.display.flip()
 		
 	def mostrar_opciones(self):
-		pass        
+		done = False
+		size = [constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT]
+		self.screen = pygame.display.set_mode(size)
+		while not done:
+			for event in pygame.event.get():
+				if event.type == pygame.KEYDOWN:
+					done = True
+					self.main()
+				self.instruccion.render(self.screen, (0, 0))
+				time.sleep(1.1)
+				pygame.display.update()
 
 	def main(self):
 		pygame.init()
@@ -492,7 +505,6 @@ class Game:
 		self.screen = pygame.display.set_mode(size)
 
 		# Configuraciones de la pantalla principal
-		pygame.display.set_caption("Looking for my Son")
 		pygame.mixer.music.load("sounds/intro.mp3")
 		pygame.mixer.music.play(10)
 		done = False
