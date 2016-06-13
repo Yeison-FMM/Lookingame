@@ -23,6 +23,7 @@ class Game:
 		self.screen = pygame.display.set_mode((constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT))
 		self.background_image = self.load_image("images/background_initial.png").convert()
 		self.instruccion = GIFImage("intro.gif")
+		self.myMovie = pygame.movie.Movie("introduccion12.mpg")
 		self.gameover = self.load_image("game-over.jpg").convert()
 		self.gana = self.load_image("win.png").convert()
 		self.pause = True
